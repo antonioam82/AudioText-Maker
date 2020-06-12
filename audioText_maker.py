@@ -9,7 +9,11 @@ class app():
     def __init__(self):
         self.window = Tk()
         self.window.title("AudioText Maker")
-        self.window.geometry("700x500")
+        self.window['bg'] = 'gainsboro'
+        self.window.geometry("593x500")
+
+        self.entry = sct.ScrolledText(self.window,width=69,height=8)
+        self.entry.place(x=10,y=20)
 
 
         self.window.mainloop()
