@@ -15,12 +15,13 @@ class app():
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8)
         self.entry.place(x=10,y=20)
-        self.btnTrans = Button(self.window,text='TRANSLATE TEXT',width=81)
-        self.btnTrans.place(x=10,y=180)
-        self.btnCreate = Button(self.window,text='TRANSLATE TEXT',width=81)
-        self.btnCreate.place(x=10,y=208)
+        self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81)
+        self.btnCreate.place(x=10,y=200)
         self.btnClear = Button(self.window,text='CLEAR TEXT',width=81)
         self.btnClear.place(x=10,y=236)
+        self.frame = Frame(self.window,bg='black')
+        self.lang = 'en'
+        
         self.scrollbar = Scrollbar(orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.entryLang = Listbox(self.window,width=26,height=15)
@@ -29,8 +30,6 @@ class app():
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
         
-        
-
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
 
