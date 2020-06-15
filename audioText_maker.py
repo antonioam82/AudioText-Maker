@@ -20,7 +20,7 @@ class app():
         self.entry.place(x=10,y=20)
         self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,command=self.init_audio)
         self.btnCreate.place(x=10,y=175)
-        self.btnClear = Button(self.window,text='CLEAR TEXT',width=81)
+        self.btnClear = Button(self.window,text='CLEAR TEXT',width=81,command=self.clear)
         self.btnClear.place(x=10,y=205)
         self.btnTranslate = Button(self.window,text='TRANSLATE TEXT',width=81,command=self.init_translation)
         self.btnTranslate.place(x=10,y=235)
@@ -61,6 +61,9 @@ class app():
         self.translation = (self.translator.translate(self.text,dest=self.lang).text)
         print(self.translation)
         self.entry.insert(END,self.translation)
+
+    def clear(self):
+        self.entry.delete('1.0',END)
 
     def make_audio(self):
         self.lang = self.lang
