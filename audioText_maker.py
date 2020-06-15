@@ -15,17 +15,17 @@ class app():
         self.window['bg'] = 'gainsboro'
         self.window.geometry("774x276")
         self.translator = Translator()
+        self.lang = 'en'
+        self.text = ""        
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8)
         self.entry.place(x=10,y=20)
         self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,command=self.init_audio)
         self.btnCreate.place(x=10,y=175)
-        self.btnClear = Button(self.window,text='CLEAR TEXT',width=81,command=self.clear)
-        self.btnClear.place(x=10,y=205)
         self.btnTranslate = Button(self.window,text='TRANSLATE TEXT',width=81,command=self.init_translation)
-        self.btnTranslate.place(x=10,y=235)
-        self.lang = 'en'
-        self.text = ""
+        self.btnTranslate.place(x=10,y=205)
+        self.btnClear = Button(self.window,text='CLEAR TEXT',width=81,command=self.clear)
+        self.btnClear.place(x=10,y=235)
         self.scrollbar = Scrollbar(orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.entryLang = Listbox(self.window,width=26,height=15)
@@ -45,9 +45,7 @@ class app():
         self.entry.delete('1.0',END)
         self.position = (self.entryLang.curselection())[0]
         self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] #self.entryLang.get(2)
-        print(self.lang)
         self.translation = (self.translator.translate(self.text,dest=self.lang).text)
-        print(self.translation)
         self.entry.insert(END,self.translation)
 
     def clear(self):
@@ -57,6 +55,7 @@ class app():
         self.lang = self.lang
         self.tts = gtts.gTTS(self.translation,lang=self.lang)
         self.tts.save("TextAudio.mp3")
+        print("Done")
 
     def insertb(self):
         for i in self.valores:
