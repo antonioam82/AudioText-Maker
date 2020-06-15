@@ -18,7 +18,7 @@ class app():
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8)
         self.entry.place(x=10,y=20)
-        self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81)
+        self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,command=self.init_audio)
         self.btnCreate.place(x=10,y=175)
         self.btnClear = Button(self.window,text='CLEAR TEXT',width=81)
         self.btnClear.place(x=10,y=205)
@@ -26,14 +26,24 @@ class app():
         self.btnTranslate.place(x=10,y=235)
         self.lang = 'en'
         self.text = ""
-        
+        #self.frame.place(x=585,y=0)
+        #self.frame.config(bg="lightblue")
+        #self.frame.config(width=187,height=200)
+     
+        #self.entryLang = ttk.Combobox(self.frame,width=24,state='readonly')
+        #self.entryLang.place(x=594,y=20)
         self.scrollbar = Scrollbar(orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
+        
+        
         self.entryLang = Listbox(self.window,width=26,height=15)
         self.entryLang.place(x=594,y=20)
+        
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
         
+        
+
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
 
@@ -53,8 +63,8 @@ class app():
         self.entry.insert(END,self.translation)
 
     def make_audio(self):
-        self.lang = entryLang.get()
-        self.tts = gtts.gTTS(self.entry.get(),lang=self.lang)
+        self.lang = self.lang
+        self.tts = gtts.gTTS(self.translation,lang=self.lang)
         self.tts.save("TextAudio.mp3")
 
     def insertb(self):
