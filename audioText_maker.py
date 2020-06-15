@@ -26,24 +26,13 @@ class app():
         self.btnTranslate.place(x=10,y=235)
         self.lang = 'en'
         self.text = ""
-        #self.frame.place(x=585,y=0)
-        #self.frame.config(bg="lightblue")
-        #self.frame.config(width=187,height=200)
-     
-        #self.entryLang = ttk.Combobox(self.frame,width=24,state='readonly')
-        #self.entryLang.place(x=594,y=20)
         self.scrollbar = Scrollbar(orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
-        
-        
         self.entryLang = Listbox(self.window,width=26,height=15)
         self.entryLang.place(x=594,y=20)
-        
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
         
-        
-
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
 
@@ -52,7 +41,6 @@ class app():
         self.window.mainloop()
         
     def translate(self):
-        #
         self.text = self.entry.get('1.0',END)
         self.entry.delete('1.0',END)
         self.position = (self.entryLang.curselection())[0]
