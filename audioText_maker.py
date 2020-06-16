@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter import messagebox
+from tkinter import messagebox, filedialog
 import tkinter.scrolledtext as sct
 from langs_dict import langs
 import gtts
@@ -56,8 +56,9 @@ class app():
 
     def make_audio(self):
         self.lang = self.lang
+        myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
         self.tts = gtts.gTTS(self.translation,lang=self.lang)
-        self.tts.save("TextAudio.mp3")
+        self.tts.save(myFile)
         messagebox.showinfo("TASK COMPLETED","File created successfully")
         
     def insertb(self):
