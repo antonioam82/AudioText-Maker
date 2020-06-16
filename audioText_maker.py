@@ -15,7 +15,7 @@ class app():
         self.window['bg'] = 'gainsboro'
         self.window.geometry("774x276")
         self.translator = Translator()
-        self.lang = 'en'
+        #self.lang = 'en'
         self.text = ""        
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8)
@@ -41,12 +41,15 @@ class app():
         self.window.mainloop()
         
     def translate(self):
-        self.text = self.entry.get('1.0',END)
-        self.entry.delete('1.0',END)
-        self.position = (self.entryLang.curselection())[0]
-        self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] #self.entryLang.get(2)
-        self.translation = (self.translator.translate(self.text,dest=self.lang).text)
-        self.entry.insert(END,self.translation)
+        try:
+            self.text = self.entry.get('1.0',END)
+            self.entry.delete('1.0',END)
+            self.position = (self.entryLang.curselection())[0]
+            self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] #self.entryLang.get(2)
+            self.translation = (self.translator.translate(self.text,dest=self.lang).text)
+            self.entry.insert(END,self.translation)
+        except:
+            messagebox.showwarning("ERROR","Make sure you have chosen a language")
 
     def clear(self):
         self.entry.delete('1.0',END)
@@ -55,8 +58,8 @@ class app():
         self.lang = self.lang
         self.tts = gtts.gTTS(self.translation,lang=self.lang)
         self.tts.save("TextAudio.mp3")
-        print("Done")
-
+        messagebox.showinfo("TASK COMPLETED","File created successfully")
+        
     def insertb(self):
         for i in self.valores:
             self.entryLang.insert(END,i)
