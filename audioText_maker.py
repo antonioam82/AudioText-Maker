@@ -16,6 +16,7 @@ class app():
         self.window.geometry("774x276")
         self.translator = Translator()
         #self.lang = 'en'
+        self.step1 = False
         self.text = ""        
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8)
@@ -45,11 +46,16 @@ class app():
             self.text = self.entry.get('1.0',END)
             self.entry.delete('1.0',END)
             self.position = (self.entryLang.curselection())[0]
+            self.step = True
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] #self.entryLang.get(2)
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
             self.entry.insert(END,self.translation)
+            self.step1 = False
         except:
-            messagebox.showwarning("ERROR","Make sure you have chosen a language")
+            if self.step1 == False:
+                messagebox.showwarning("ERROR","Make sure you have chosen a language")
+            else:
+                messagebox.showwarning("ERROR","Unexpected error")
 
     def clear(self):
         self.entry.delete('1.0',END)
