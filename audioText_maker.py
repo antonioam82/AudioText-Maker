@@ -66,8 +66,9 @@ class app():
         t1.start()
 
     def init_audio(self):
-        t = threading.Thread(target=self.make_audio)
-        t.start()
+        if self.translation != "":
+            t = threading.Thread(target=self.make_audio)
+            t.start()
 
 if __name__=="__main__":
     app()
