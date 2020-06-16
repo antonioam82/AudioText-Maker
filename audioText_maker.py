@@ -15,7 +15,6 @@ class app():
         self.window['bg'] = 'gainsboro'
         self.window.geometry("774x276")
         self.translator = Translator()
-        #self.lang = 'en'
         self.step1 = False
         self.text = ""        
 
@@ -46,7 +45,7 @@ class app():
             self.text = self.entry.get('1.0',END)
             self.entry.delete('1.0',END)
             self.position = (self.entryLang.curselection())[0]
-            self.step = True
+            self.step1 = True
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] #self.entryLang.get(2)
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
             self.entry.insert(END,self.translation)
