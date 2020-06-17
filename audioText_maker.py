@@ -15,10 +15,11 @@ class app():
         self.window['bg'] = 'gainsboro'
         self.window.geometry("774x276")
         self.translator = Translator()
+        self.translation = ""
         self.step1 = False
         self.text = ""        
 
-        self.entry = sct.ScrolledText(self.window,width=69,height=8)
+        self.entry = sct.ScrolledText(self.window,width=69,height=8)#8
         self.entry.place(x=10,y=20)
         self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,command=self.init_audio)
         self.btnCreate.place(x=10,y=175)
@@ -32,6 +33,8 @@ class app():
         self.entryLang.place(x=594,y=20)
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
+        self.label = Label(self.window,text="",width=81,bg='gainsboro',fg='red')
+        self.label.place(x=10,y=154)
         
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
@@ -42,6 +45,7 @@ class app():
         
     def translate(self):
         try:
+            self.label.configure(text='TRASLATING...')
             self.text = self.entry.get('1.0',END)
             self.entry.delete('1.0',END)
             self.position = (self.entryLang.curselection())[0]
@@ -55,6 +59,7 @@ class app():
                 messagebox.showwarning("ERROR","Make sure you have chosen a language")
             else:
                 messagebox.showwarning("ERROR","Unexpected error")
+        self.label.configure(text="")
 
     def clear(self):
         self.entry.delete('1.0',END)
