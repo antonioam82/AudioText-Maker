@@ -76,8 +76,11 @@ class app():
             self.entryLang.insert(END,i)
 
     def init_translation(self):
-        t1 = threading.Thread(target=self.translate)
-        t1.start()
+        if len(self.entry.get('1.0',END))>1:
+            t1 = threading.Thread(target=self.translate)
+            t1.start()
+        else:
+            messagebox.showwarning("NO TEXT","You haven't wrote anything to translate")
 
     def init_audio(self):
         if self.translation != "":
