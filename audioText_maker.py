@@ -65,8 +65,8 @@ class app():
         self.entry.delete('1.0',END)
 
     def make_audio(self):
-        self.label.configure(text="CREATING AUDIO FILE")
         myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
+        self.label.configure(text="CREATING AUDIO FILE")
         self.tts = gtts.gTTS(self.translation,lang=self.lang)
         self.tts.save(myFile)
         messagebox.showinfo("TASK COMPLETED","File created successfully")
