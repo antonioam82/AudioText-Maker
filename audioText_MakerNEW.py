@@ -75,6 +75,7 @@ class app():
         self.tts.save(myFile)
         messagebox.showinfo("TASK COMPLETED","File created successfully")
         self.label.configure(text="")
+        self.lang = ""
 
     def define_lang(self):
         if self.lang == "":
