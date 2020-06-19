@@ -52,7 +52,7 @@ class app():
             self.entry.delete('1.0',END)
             self.position = (self.entryLang.curselection())[0]
             self.step1 = True
-            self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] #self.entryLang.get(2)
+            self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] 
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
             self.entry.insert(END,self.translation)
             self.step1 = False
@@ -69,20 +69,20 @@ class app():
     def make_audio(self):
         myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
         self.label.configure(text="CREATING AUDIO FILE")
-        self.define_lang()
-        self.tts = gtts.gTTS(self.translation,lang=self.lang)
-        print("T: ",self.translation)
-        self.tts.save(myFile)
-        messagebox.showinfo("TASK COMPLETED","File created successfully")
-        self.label.configure(text="")
+        try:
+            self.define_lang()
+            self.tts = gtts.gTTS(self.translation,lang=self.lang)
+            self.tts.save(myFile)
+            messagebox.showinfo("TASK COMPLETED","File created successfully")
+            self.label.configure(text="")
+        except:
+            messagebox.showwarning("ERROR","Unexpected error")
         self.lang = ""
 
     def define_lang(self):
         if self.lang == "":
             self.lang = (self.translator.translate(self.entry.get('1.0',END)).src)
             self.translation = self.entry.get('1.0',END)
-            print(self.lang)
-            print("T: ",self.translation)
         
     def insertb(self):
         for i in self.valores:
@@ -96,7 +96,6 @@ class app():
             messagebox.showwarning("NO TEXT","You haven't wrote anything to translate")
 
     def init_audio(self):
-        #if self.translation != "":
         t = threading.Thread(target=self.make_audio)
         t.start()
 
