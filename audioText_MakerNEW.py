@@ -54,7 +54,7 @@ class app():
             self.step1 = True
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] 
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
-            self.entry.insert(END,self.translation)
+            #self.entry.insert(END,self.translation)
             self.step1 = False
         except:
             if self.step1 == False:
@@ -62,9 +62,14 @@ class app():
             else:
                 messagebox.showwarning("ERROR","Unexpected error")
         self.label.configure(text="")
+        self.insert_translation()
 
     def clear(self):
         self.entry.delete('1.0',END)
+
+    def insert_translation(self):
+        if self.translation != "":
+            self.entry.insert(END,self.translation)
 
     def make_audio(self):
         myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
@@ -96,8 +101,10 @@ class app():
             messagebox.showwarning("NO TEXT","You haven't wrote anything to translate")
 
     def init_audio(self):
+        #if self.translation != "":
         t = threading.Thread(target=self.make_audio)
         t.start()
 
 if __name__=="__main__":
     app()
+
