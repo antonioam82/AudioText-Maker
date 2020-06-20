@@ -54,7 +54,6 @@ class app():
             self.step1 = True
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] 
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
-            #self.entry.insert(END,self.translation)
             self.step1 = False
         except:
             if self.step1 == False:
@@ -101,9 +100,9 @@ class app():
             messagebox.showwarning("NO TEXT","You haven't wrote anything to translate")
 
     def init_audio(self):
-        #if self.translation != "":
-        t = threading.Thread(target=self.make_audio)
-        t.start()
+        if len(self.entry.get('1.0',END))>1:
+            t = threading.Thread(target=self.make_audio)
+            t.start()
 
 if __name__=="__main__":
     app()
