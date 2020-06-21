@@ -22,11 +22,11 @@ class app():
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8)#8
         self.entry.place(x=10,y=20)
-        self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,command=self.init_audio)
+        self.btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio)
         self.btnCreate.place(x=10,y=175)
-        self.btnTranslate = Button(self.window,text='TRANSLATE TEXT',width=81,command=self.init_translation)
+        self.btnTranslate = Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation)
         self.btnTranslate.place(x=10,y=205)
-        self.btnClear = Button(self.window,text='CLEAR TEXT',width=81,command=self.clear)
+        self.btnClear = Button(self.window,text='CLEAR TEXT',width=81,bg='thistle2',command=self.clear)
         self.btnClear.place(x=10,y=235)
         self.scrollbar = Scrollbar(orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
@@ -54,6 +54,7 @@ class app():
             self.step1 = True
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] 
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
+            #self.entry.insert(END,self.translation)
             self.step1 = False
         except:
             if self.step1 == False:
@@ -76,6 +77,7 @@ class app():
         try:
             self.define_lang()
             self.tts = gtts.gTTS(self.translation,lang=self.lang)
+            print("T: ",self.translation)
             self.tts.save(myFile)
             messagebox.showinfo("TASK COMPLETED","File created successfully")
             self.label.configure(text="")
@@ -87,6 +89,8 @@ class app():
         if self.lang == "":
             self.lang = (self.translator.translate(self.entry.get('1.0',END)).src)
             self.translation = self.entry.get('1.0',END)
+            print(self.lang)
+            print("T: ",self.translation)
         
     def insertb(self):
         for i in self.valores:
