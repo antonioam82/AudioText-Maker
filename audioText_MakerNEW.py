@@ -78,10 +78,11 @@ class app():
             self.tts = gtts.gTTS(self.translation,lang=self.lang)
             self.tts.save(myFile)
             messagebox.showinfo("TASK COMPLETED","File created successfully")
-            self.label.configure(text="")
         except:
             messagebox.showwarning("ERROR","Unexpected error")
+        self.label.configure(text="")
         self.lang = ""
+        self.translation = ""
 
     def define_lang(self):
         if self.lang == "":
