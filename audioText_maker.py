@@ -81,7 +81,7 @@ class app():
             t1 = threading.Thread(target=self.translate)
             t1.start()
         else:
-            messagebox.showwarning("NO TEXT","You haven't wrote anything to translate")
+            messagebox.showwarning("NO TEXT","You haven't written anything to translate")
 
     def init_audio(self):
         if self.translation != "":
