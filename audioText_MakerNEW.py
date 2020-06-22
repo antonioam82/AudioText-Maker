@@ -72,17 +72,20 @@ class app():
 
     def make_audio(self):
         myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
-        self.label.configure(text="CREATING AUDIO FILE")
-        try:
-            self.define_lang()
-            self.tts = gtts.gTTS(self.translation,lang=self.lang)
-            self.tts.save(myFile)
-            messagebox.showinfo("TASK COMPLETED","File created successfully")
-        except:
-            messagebox.showwarning("ERROR","Unexpected error")
-        self.label.configure(text="")
-        self.lang = ""
-        self.translation = ""
+        if myFile != "":
+            self.label.configure(text="CREATING AUDIO FILE")
+            try:
+                self.define_lang()
+                self.tts = gtts.gTTS(self.translation,lang=self.lang)
+                self.tts.save(myFile)
+                messagebox.showinfo("TASK COMPLETED","File created successfully")
+            except:
+                messagebox.showwarning("ERROR","Unexpected error")
+            self.label.configure(text="")
+            self.lang = ""
+            self.translation = ""
+        else:
+            messagebox.showwarning("ERROR","Filename not defined")
 
     def define_lang(self):
         if self.lang == "":
@@ -98,7 +101,7 @@ class app():
             t1 = threading.Thread(target=self.translate)
             t1.start()
         else:
-            messagebox.showwarning("NO TEXT","You haven't wrote anything to translate")
+            messagebox.showwarning("NO TEXT","You haven't written anything to translate")
 
     def init_audio(self):
         if len(self.entry.get('1.0',END))>1:
