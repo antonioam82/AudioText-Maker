@@ -84,8 +84,8 @@ class app():
             self.label.configure(text="")
             self.lang = ""
             self.translation = ""
-        else:
-            messagebox.showwarning("ERROR","Filename not defined")
+        #else:
+            #messagebox.showwarning("ERROR","Filename not defined")
 
     def define_lang(self):
         if self.lang == "":
