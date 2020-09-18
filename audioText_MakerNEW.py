@@ -2,11 +2,19 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox, filedialog
 import tkinter.scrolledtext as sct
-from langs_dict import langs
 import gtts
 import threading
 from googletrans import Translator
 import os
+
+langs ={'af': 'Afrikaans', 'sq': 'Albanian', 'ar': 'Arabic', 'hy': 'Armenian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'hr': 'Croatian',
+        'cs': 'Czech', 'da': 'Danish', 'nl': 'Dutch', 'en': 'English', 'eo': 'Esperanto', 'et': 'Estonian', 'tl': 'Filipino','fi': 'Finnish','fr': 'French',
+        'de': 'German', 'el': 'Greek', 'gu': 'Gujarati', 'hi': 'Hindi', 'hu': 'Hungarian', 'is': 'Icelandic', 'id': 'Indonesian', 'it': 'Italian',
+        'ja': 'Japanese', 'jw': 'Javanese', 'kn': 'Kannada', 'km': 'Khmer', 'ko': 'Korean', 'la': 'Latin', 'lv': 'Latvian', 'mk': 'Macedonian',
+        'ml': 'Malayalam', 'mr': 'Marathi', 'my': 'Myanmar (Burmese)', 'ne': 'Nepali', 'no': 'Norwegian', 'pl': 'Polish',
+        'pt': 'Portuguese', 'ro': 'Romanian', 'ru': 'Russian', 'sr': 'Serbian', 'si': 'Sinhala', 'sk': 'Slovak', 'es': 'Spanish', 'su': 'Sundanese',
+        'sw': 'Swahili', 'sv': 'Swedish', 'ta': 'Tamil', 'te': 'Telugu', 'th': 'Thai', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu',
+        'vi': 'Vietnamese', 'cy': 'Welsh', 'zh-cn': 'Chinese (Mandarin/China)', 'zh-tw': 'Chinese (Mandarin/Taiwan)'}
 
 class app():
     def __init__(self):
@@ -76,7 +84,12 @@ class app():
             self.label.configure(text="CREATING AUDIO FILE")
             try:
                 self.define_lang()
-                self.tts = gtts.gTTS(self.translation,lang=self.lang)
+                if self.translation == self.entry.get('1.0',END):
+                    print("good")
+                    self.tts = gtts.gTTS(self.translation,lang=self.lang)
+                else:
+                    lan = (self.translator.translate(self.entry.get('1.0',END)).src)
+                    self.tts = gtts.gTTS(self.entry.get('1.0',END),lang=lan)
                 self.tts.save(myFile)
                 messagebox.showinfo("TASK COMPLETED","File created successfully")
             except:
