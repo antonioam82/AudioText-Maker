@@ -61,21 +61,20 @@ class app():
             self.text = self.entry.get('1.0',END)
             self.entry.delete('1.0',END)
             self.position = (self.entryLang.curselection())[0]
-            self.step1 = True
+            #self.step1 = True
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] 
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
-            self.step1 = False
+            #self.step1 = False
         except Exception as e:
-            if self.step1 == False:
-                if str(e) == "tuple index out of range":
-                    messagebox.showwarning("ERROR","Make sure you have chosen a language")
-                else:
-                    messagebox.showwarning("ERROR","Unexpected error")
+            if str(e) == "tuple index out of range":
+                messagebox.showwarning("ERROR","Make sure you have chosen a language")
+            else:
+                messagebox.showwarning("ERROR","Unexpected error")
                     
                 #messagebox.showwarning("ERROR",e)
                 #messagebox.showwarning("ERROR","""1-Make sure you have chosen a language\n2-Check your internet conection""")
-            else:
-                messagebox.showwarning("ERROR","Unexpected error")
+            #else:
+                #messagebox.showwarning("ERROR","Unexpected error")
         self.label.configure(text="")
         self.insert_translation()
 
