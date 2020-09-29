@@ -26,7 +26,6 @@ class app():
         self.window.geometry("774x276")
         self.translator = Translator()
         self.translation = ""
-        self.step1 = False
         self.text = ""
         self.lang = ""
 
