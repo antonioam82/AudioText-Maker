@@ -38,7 +38,7 @@ class app():
         self.btnTranslate.place(x=10,y=205)
         self.btnClear = Button(self.window,text='CLEAR TEXT',width=39,bg='thistle2',command=self.clear)
         self.btnClear.place(x=10,y=235)
-        self.btnHeard = Button(self.window,text='LISTEN AUDIO',width=39,bg='thistle2',command=self.init_playsound)
+        self.btnHeard = Button(self.window,text='LISTEN AUDIO-FILE',width=39,bg='thistle2',command=self.init_playsound)
         self.btnHeard.place(x=304,y=235)
         self.scrollbar = Scrollbar(orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
@@ -131,6 +131,8 @@ class app():
         if self.myFile != "":
             t1 = threading.Thread(target=self.play_audio)
             t1.start()
+        else:
+            messagebox.showwarning("NO FILE CREATED","You haven't created your audio file yet")
 
 if __name__=="__main__":
     app()
