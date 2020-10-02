@@ -46,7 +46,7 @@ class app():
         self.entryLang.place(x=594,y=20)
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
-        self.label = Label(self.window,text="",width=81,bg='gainsboro')
+        self.label = Label(self.window,text="",width=81,bg='gainsboro',fg='blue')
         self.label.place(x=10,y=154)
         
         self.valores = list(langs.values())
