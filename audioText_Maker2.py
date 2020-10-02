@@ -76,7 +76,9 @@ class app():
         self.insert_translation()
 
     def play_audio(self):
+        self.label.configure(text='PLAYING: {}'.format((self.myFile).split("/")[-1]))
         playsound.playsound(self.myFile)
+        self.label.configure(text="")
         
 
     def clear(self):
@@ -89,7 +91,6 @@ class app():
     def make_audio(self):
         self.myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
         if self.myFile != "":
-            print(self.myFile)
             self.label.configure(text="CREATING AUDIO FILE")
             try:
                 self.define_lang()
