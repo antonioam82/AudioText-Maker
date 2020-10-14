@@ -28,6 +28,8 @@ class app():
         self.translation = ""
         self.text = ""
         self.lang = ""
+        self.canvas = Canvas(self.window)
+        self.canvas.place(x=594,y=20)
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8,bg='azure1')
         self.entry.place(x=10,y=20)
@@ -37,10 +39,10 @@ class app():
         self.btnTranslate.place(x=10,y=205)
         self.btnClear = Button(self.window,text='CLEAR TEXT',width=81,bg='thistle2',command=self.clear)
         self.btnClear.place(x=10,y=235)
-        self.scrollbar = Scrollbar(orient=VERTICAL)
+        self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
-        self.entryLang = Listbox(self.window,width=26,height=15)
-        self.entryLang.place(x=594,y=20)
+        self.entryLang = Listbox(self.canvas,width=26,height=15)
+        self.entryLang.pack()
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
         self.label = Label(self.window,text="",width=81,bg='gainsboro',fg='red')
@@ -62,11 +64,13 @@ class app():
             self.position = (self.entryLang.curselection())[0]
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))] 
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
+            
         except Exception as e:
             if str(e) == "tuple index out of range":
                 messagebox.showwarning("ERROR","Make sure you have chosen a language.")
             else:
                 messagebox.showwarning("ERROR","Unexpected error.")
+
         self.label.configure(text="")
         self.insert_translation()
 
