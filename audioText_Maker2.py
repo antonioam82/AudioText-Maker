@@ -29,6 +29,8 @@ class app():
         self.translation = ""
         self.text = ""
         self.lang = ""
+        self.canvas = Canvas(self.window)
+        self.canvas.place(x=594,y=20)
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8,bg='azure1')
         self.entry.place(x=10,y=20)
@@ -40,10 +42,10 @@ class app():
         self.btnClear.place(x=10,y=235)
         self.btnHeard = Button(self.window,text='LISTEN AUDIO-FILE',width=39,bg='thistle2',command=self.init_playsound)
         self.btnHeard.place(x=304,y=235)
-        self.scrollbar = Scrollbar(orient=VERTICAL)
+        self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
-        self.entryLang = Listbox(self.window,width=26,height=15)
-        self.entryLang.place(x=594,y=20)
+        self.entryLang = Listbox(self.canvas,width=26,height=15)
+        self.entryLang.pack()
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
         self.label = Label(self.window,text="",width=81,bg='gainsboro',fg='blue')
