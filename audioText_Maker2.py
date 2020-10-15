@@ -31,6 +31,7 @@ class app():
         self.lang = ""
         self.canvas = Canvas(self.window)
         self.canvas.place(x=594,y=20)
+        self.ultimo = ""
 
         self.entry = sct.ScrolledText(self.window,width=69,height=8,bg='azure1')
         self.entry.place(x=10,y=20)
@@ -78,8 +79,8 @@ class app():
         self.insert_translation()
 
     def play_audio(self):
-        self.label.configure(text='PLAYING: {}'.format((self.myFile).split("/")[-1]))
-        playsound.playsound(self.myFile)
+        self.label.configure(text='PLAYING: {}'.format((self.ultimo).split("/")[-1]))
+        playsound.playsound(self.ultimo)
         self.label.configure(text="")
         
 
@@ -93,6 +94,7 @@ class app():
     def make_audio(self):
         self.myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
         if self.myFile != "":
+            self.ultimo = self.myFile
             self.label.configure(text="CREATING AUDIO FILE")
             try:
                 self.define_lang()
@@ -131,7 +133,7 @@ class app():
             t.start()
 
     def init_playsound(self):
-        if self.myFile != "":
+        if self.ultimo != "":
             t1 = threading.Thread(target=self.play_audio)
             t1.start()
         else:
