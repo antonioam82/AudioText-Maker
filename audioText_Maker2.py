@@ -79,8 +79,11 @@ class app():
         self.insert_translation()
 
     def play_audio(self):
-        self.label.configure(text='PLAYING: {}'.format((self.ultimo).split("/")[-1]))
-        playsound.playsound(self.ultimo)
+        try:
+            self.label.configure(text='PLAYING: {}'.format((self.ultimo).split("/")[-1]))
+            playsound.playsound(self.ultimo)
+        except:
+            messagebox.showwarning("ERROR",'Can not play {}'.format((self.ultimo).split("/")[-1]))
         self.label.configure(text="")
         
 
@@ -105,8 +108,8 @@ class app():
                     self.tts = gtts.gTTS(self.entry.get('1.0',END),lang=lan)
                 self.tts.save(self.myFile)
                 messagebox.showinfo("TASK COMPLETED","File created successfully")
-            except:
-                messagebox.showwarning("ERROR","Unexpected error")
+            except Exception as e:
+                messagebox.showwarning("ERROR",str(e))
             self.label.configure(text="")
             self.lang = ""
             self.translation = ""
