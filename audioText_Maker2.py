@@ -73,7 +73,7 @@ class app():
             if str(e) == "tuple index out of range":
                 messagebox.showwarning("ERROR","Make sure you have chosen a language.")
             else:
-                messagebox.showwarning("ERROR","Unexpected error.")
+                messagebox.showwarning("ERROR",("Unexpected error: "+str(e)))
 
         self.label.configure(text="")
         self.insert_translation()
@@ -109,7 +109,8 @@ class app():
                 self.tts.save(self.myFile)
                 messagebox.showinfo("TASK COMPLETED","File created successfully")
             except Exception as e:
-                messagebox.showwarning("ERROR",str(e))
+                messagebox.showwarning("ERROR","Unexpected error: "+str(e))
+                print(str(e))
             self.label.configure(text="")
             self.lang = ""
             self.translation = ""
