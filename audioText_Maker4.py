@@ -5,7 +5,6 @@ from tkinter import ttk
 from tkinter import messagebox, filedialog
 import tkinter.scrolledtext as sct
 import gtts, playsound
-from idlelib.tooltip import Hovertip
 import threading
 from googletrans import Translator
 import os
@@ -39,14 +38,10 @@ class app():
         Entry(self.window,textvariable=self.currentDir,width=130).place(x=0,y=0)
         self.entry = sct.ScrolledText(self.window,width=69,height=8,bg='azure1')
         self.entry.place(x=10,y=40)
-        btnCreate = Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio)
-        btnCreate.place(x=10,y=195)
-        btnTranslate = Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation)
-        btnTranslate.place(x=10,y=225)
-        btnClear = Button(self.window,text='CLEAR TEXT',width=39,bg='thistle2',command=self.clear)
-        btnClear.place(x=10,y=255)
-        btnListen = Button(self.window,text='LISTEN AUDIO-FILE',width=39,bg='thistle2',command=self.init_playsound)
-        btnListen.place(x=304,y=255)
+        Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio).place(x=10,y=195)
+        Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation).place(x=10,y=225)
+        Button(self.window,text='CLEAR TEXT',width=39,bg='thistle2',command=self.clear).place(x=10,y=255)
+        Button(self.window,text='LISTEN AUDIO-FILE',width=39,bg='thistle2',command=self.init_playsound).place(x=304,y=255)
         self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
         self.scrollbar.pack(side=RIGHT,fill=Y)
         self.entryLang = Listbox(self.canvas,width=26,height=15)
@@ -55,12 +50,6 @@ class app():
         self.scrollbar.config(command = self.entryLang.yview)
         self.label = Label(self.window,text="",width=81,bg='gainsboro',fg='blue')
         self.label.place(x=10,y=174)
-
-        Hovertip(btnTranslate, text="Tranlate current text", hover_delay=500)
-        Hovertip(btnClear, text="Clear current text", hover_delay=500)
-        Hovertip(btnCreate, text="Create audio file", hover_delay=500)
-        Hovertip(btnListen, text="Display last audio file created", hover_delay=500)
-        
         
         self.valores = list(langs.values())
         self.claves = list(langs.keys())
@@ -106,7 +95,7 @@ class app():
             self.entry.insert(END,self.translation)
 
     def make_audio(self):
-        self.myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
+        self.myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",initialfile="audiotext",defaultextension=".mp3")
         if self.myFile != "":
             self.ultimo = self.myFile
             self.label.configure(text="CREATING AUDIO FILE")
