@@ -85,7 +85,6 @@ class app():
         except:
             messagebox.showwarning("ERROR",'Can not play {}'.format((self.ultimo).split("/")[-1]))
         self.label.configure(text="")
-        
 
     def clear(self):
         self.entry.delete('1.0',END)
@@ -110,7 +109,6 @@ class app():
                 messagebox.showinfo("TASK COMPLETED","File created successfully.")
             except Exception as e:
                 messagebox.showwarning("ERROR","Unexpected error: "+str(e))
-                print(str(e))
             self.label.configure(text="")
             self.lang = ""
             self.translation = ""
@@ -129,7 +127,7 @@ class app():
             t1 = threading.Thread(target=self.translate)
             t1.start()
         else:
-            messagebox.showwarning("NO TEXT","You haven't written anything to translate.")
+            messagebox.showwarning("NO TEXT","There's nothing to translate yet.")
 
     def init_audio(self):
         if len(self.entry.get('1.0',END))>1:
