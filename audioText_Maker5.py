@@ -25,7 +25,6 @@ class app():
         self.window['bg'] = 'gainsboro'
         self.window.geometry("785x299")
         self.translator = Translator()
-        #self.myFile = ""
         self.translation = ""
         self.text = ""
         self.lang = ""
@@ -106,6 +105,8 @@ class app():
                 else:
                     lan = (self.translator.translate(self.entry.get('1.0',END)).src)
                     self.tts = gtts.gTTS(self.entry.get('1.0',END),lang=lan)
+                if os.path.exists(self.myFile):
+                    os.remove(self.myFile)
                 self.tts.save(self.myFile)
                 messagebox.showinfo("TASK COMPLETED","File created successfully.")
             except Exception as e:
