@@ -28,7 +28,7 @@ class app():
         self.currentDir.set(os.getcwd())
 
         Entry(self.window,textvariable=self.currentDir,width=130).place(x=0,y=0)
-        self.entry = sct.ScrolledText(self.window,width=69,height=8,bg='azure1')
+        self.entry = sct.ScrolledText(self.window,wrap=WORD,width=69,height=8,bg='azure1')
         self.entry.place(x=10,y=40)
         Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio).place(x=10,y=195)
         Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation).place(x=10,y=225)
@@ -94,7 +94,7 @@ class app():
             try:
                 self.define_lang()
                 if self.translation == self.entry.get('1.0',END):
-                    self.tts = gtts.gTTS(self.translation,lang=self.lang)
+                    self.tts = gtts.gTTS(self.translation,lang=self.lang)#####################################################
                 else:
                     lan = (self.translator.translate(self.entry.get('1.0',END)).src)
                     self.tts = gtts.gTTS(self.entry.get('1.0',END),lang=lan)
