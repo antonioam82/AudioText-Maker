@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox, filedialog
 import tkinter.scrolledtext as sct
@@ -13,7 +13,7 @@ langs = gtts.lang.tts_langs()
 
 class app():
     def __init__(self):
-        self.window = Tk()
+        self.window = tk.Tk()
         self.window.title("AudioText Maker")
         self.window['bg'] = 'gainsboro'
         self.window.geometry("785x299")
@@ -21,26 +21,26 @@ class app():
         self.translation = ""
         self.text = ""
         self.lang = ""
-        self.canvas = Canvas(self.window)
+        self.canvas = tk.Canvas(self.window)
         self.canvas.place(x=598,y=40)
         self.ultimo = ""
-        self.currentDir = StringVar()
+        self.currentDir = tk.StringVar()
         self.currentDir.set(os.getcwd())
 
-        Entry(self.window,textvariable=self.currentDir,width=130).place(x=0,y=0)
-        self.entry = sct.ScrolledText(self.window,wrap=WORD,width=69,height=8,bg='azure1')
+        tk.Entry(self.window,textvariable=self.currentDir,width=130).place(x=0,y=0)
+        self.entry = sct.ScrolledText(self.window,wrap=tk.WORD,width=69,height=8,bg='azure1')
         self.entry.place(x=10,y=40)
-        Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio).place(x=10,y=195)
-        Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation).place(x=10,y=225)
-        Button(self.window,text='CLEAR TEXT',width=39,bg='thistle2',command=self.clear).place(x=10,y=255)
-        Button(self.window,text='LISTEN AUDIO-FILE',width=39,bg='thistle2',command=self.init_playsound).place(x=304,y=255)
-        self.scrollbar = Scrollbar(self.canvas,orient=VERTICAL)
-        self.scrollbar.pack(side=RIGHT,fill=Y)
-        self.entryLang = Listbox(self.canvas,width=26,height=15)
+        tk.Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio).place(x=10,y=195)
+        tk.Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation).place(x=10,y=225)
+        tk.Button(self.window,text='CLEAR TEXT',width=39,bg='thistle2',command=self.clear).place(x=10,y=255)
+        tk.Button(self.window,text='LISTEN AUDIO-FILE',width=39,bg='thistle2',command=self.init_playsound).place(x=304,y=255)
+        self.scrollbar = tk.Scrollbar(self.canvas,orient=tk.VERTICAL)
+        self.scrollbar.pack(side=tk.RIGHT,fill=tk.Y)
+        self.entryLang = tk.Listbox(self.canvas,width=26,height=15)
         self.entryLang.pack()
         self.entryLang.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.entryLang.yview)
-        self.label = Label(self.window,text="",width=81,bg='gainsboro',fg='blue')
+        self.label = tk.Label(self.window,text="",width=81,bg='gainsboro',fg='blue')
         self.label.place(x=10,y=174)
 
         self.valores = list(langs.values())
@@ -54,8 +54,8 @@ class app():
         try:
             self.label.configure(text='TRASLATING...')
             self.define_lang()
-            self.text = self.entry.get('1.0',END)
-            self.entry.delete('1.0',END)
+            self.text = self.entry.get('1.0',tk.END)
+            self.entry.delete('1.0',tk.END)
             self.position = (self.entryLang.curselection())[0]
             self.lang = self.claves[(self.valores).index(self.entryLang.get(int(self.position)))]
             self.translation = (self.translator.translate(self.text,dest=self.lang).text)
@@ -80,11 +80,11 @@ class app():
 
 
     def clear(self):
-        self.entry.delete('1.0',END)
+        self.entry.delete('1.0',tk.END)
 
     def insert_translation(self):
         if self.translation != "":
-            self.entry.insert(END,self.translation)
+            self.entry.insert(tk.END,self.translation)
 
     def make_audio(self):
         self.myFile=filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension=".mp3")
@@ -93,11 +93,11 @@ class app():
             self.label.configure(text="CREATING AUDIO FILE")
             try:
                 self.define_lang()
-                if self.translation == self.entry.get('1.0',END):
+                if self.translation == self.entry.get('1.0',tk.END):
                     self.tts = gtts.gTTS(self.translation,lang=self.lang)#####################################################
                 else:
-                    lan = (self.translator.translate(self.entry.get('1.0',END)).src)
-                    self.tts = gtts.gTTS(self.entry.get('1.0',END),lang=lan)
+                    lan = (self.translator.translate(self.entry.get('1.0',tk.END)).src)
+                    self.tts = gtts.gTTS(self.entry.get('1.0',tk.END),lang=lan)
                 if os.path.exists(self.myFile):
                     os.remove(self.myFile)
                     self.tts.save(self.myFile)
@@ -113,22 +113,22 @@ class app():
 
     def define_lang(self):
         if self.lang == "":
-            self.lang = (self.translator.translate(self.entry.get('1.0',END)).src)
-            self.translation = self.entry.get('1.0',END)
+            self.lang = (self.translator.translate(self.entry.get('1.0',tk.END)).src)
+            self.translation = self.entry.get('1.0',tk.END)
 
     def insertb(self):
         for i in self.valores:
-            self.entryLang.insert(END,i)
+            self.entryLang.insert(tk.END,i)
 
     def init_translation(self):
-        if len(self.entry.get('1.0',END))>1:
+        if len(self.entry.get('1.0',tk.END))>1:
             t1 = threading.Thread(target=self.translate)
             t1.start()
         else:
             messagebox.showwarning("NO TEXT","You haven't written anything to translate.")
 
     def init_audio(self):
-        if len(self.entry.get('1.0',END))>1:
+        if len(self.entry.get('1.0',tk.END))>1:
             t = threading.Thread(target=self.make_audio)
             t.start()
 
