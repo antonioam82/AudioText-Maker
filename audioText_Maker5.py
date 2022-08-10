@@ -94,7 +94,7 @@ class app():
             try:
                 self.define_lang()
                 if self.translation == self.entry.get('1.0',tk.END):
-                    self.tts = gtts.gTTS(self.translation,lang=self.lang)#####################################################
+                    self.tts = gtts.gTTS(self.translation,lang=self.lang)
                 else:
                     lan = (self.translator.translate(self.entry.get('1.0',tk.END)).src)
                     self.tts = gtts.gTTS(self.entry.get('1.0',tk.END),lang=lan)
