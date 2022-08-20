@@ -29,6 +29,7 @@ class app():
 
         tk.Entry(self.window,textvariable=self.currentDir,width=130).place(x=0,y=0)
         self.entry = sct.ScrolledText(self.window,wrap=tk.WORD,width=69,height=8,bg='azure1')
+        self.entry.focus()
         self.entry.place(x=10,y=40)
         tk.Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio).place(x=10,y=195)
         tk.Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation).place(x=10,y=225)
