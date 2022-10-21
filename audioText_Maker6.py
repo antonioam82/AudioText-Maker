@@ -6,6 +6,8 @@ from tkinter import messagebox, filedialog
 import tkinter.scrolledtext as sct
 import gtts, playsound
 import threading
+import pyperclip
+import time
 from googletrans import Translator
 import os
 
@@ -34,7 +36,7 @@ class app():
         tk.Button(self.window,text='CREATE AUDIO-TEXT',width=81,bg='thistle2',command=self.init_audio).place(x=10,y=195)
         tk.Button(self.window,text='TRANSLATE TEXT',width=81,bg='thistle2',command=self.init_translation).place(x=10,y=225)
         tk.Button(self.window,text='CLEAR TEXT',width=26,bg='thistle2',command=self.clear).place(x=10,y=255)
-        tk.Button(self.window,text='IMPORT TEXT',width=26,bg='thistle2').place(x=202,y=255)
+        tk.Button(self.window,text='IMPORT TEXT',width=26,bg='thistle2',command=self.init_import).place(x=202,y=255)
         tk.Button(self.window,text='LISTEN AUDIO-FILE',width=26,bg='thistle2',command=self.init_playsound).place(x=395,y=255)
         self.scrollbar = tk.Scrollbar(self.canvas,orient=tk.VERTICAL)
         self.scrollbar.pack(side=tk.RIGHT,fill=tk.Y)
@@ -71,6 +73,18 @@ class app():
 
         self.label.configure(text="")
         self.insert_translation()
+
+    def import_text(self):
+        self.entry.delete('1.0',tk.END)
+        self.ultima_copia = pyperclip.paste().strip()
+        messagebox.showinfo("COPY TEXT","Select and copy your text")
+        while True:
+            time.sleep(0.1)
+            self.copia = pyperclip.paste().strip()
+            if self.copia != self.ultima_copia:
+                self.entry.insert(tk.END,self.copia)
+                self.ultima_copia = self.copia
+                break
 
     def play_audio(self):
         try:
@@ -133,6 +147,10 @@ class app():
         if len(self.entry.get('1.0',tk.END))>1:
             t = threading.Thread(target=self.make_audio)
             t.start()
+
+    def init_import(self):
+        t2 = threading.Thread(target=self.import_text)
+        t2.start()
 
     def init_playsound(self):
         if self.ultimo != "":
