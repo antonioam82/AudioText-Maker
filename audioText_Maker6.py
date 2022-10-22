@@ -138,24 +138,20 @@ class app():
 
     def init_translation(self):
         if len(self.entry.get('1.0',tk.END))>1:
-            t1 = threading.Thread(target=self.translate)
-            t1.start()
+            threading.Thread(target=self.translate).start()
         else:
             messagebox.showwarning("NO TEXT","You haven't written anything to translate.")
 
     def init_audio(self):
         if len(self.entry.get('1.0',tk.END))>1:
-            t = threading.Thread(target=self.make_audio)
-            t.start()
+            threading.Thread(target=self.make_audio).start()
 
     def init_import(self):
-        t2 = threading.Thread(target=self.import_text)
-        t2.start()
+        threading.Thread(target=self.import_text).start()
 
     def init_playsound(self):
         if self.ultimo != "":
-            t1 = threading.Thread(target=self.play_audio)
-            t1.start()
+            threading.Thread(target=self.play_audio).start()
         else:
             messagebox.showwarning("NO FILE CREATED","You haven't created your audio file yet.")
 
