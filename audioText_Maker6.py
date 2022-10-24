@@ -75,6 +75,7 @@ class app():
         self.insert_translation()
 
     def import_text(self):
+        self.label.configure(text="IMPORTING TEXT")
         self.entry.delete('1.0',tk.END)
         self.ultima_copia = pyperclip.paste().strip()
         messagebox.showinfo("COPY TEXT","Select and copy your text")
@@ -85,6 +86,7 @@ class app():
                 self.entry.insert(tk.END,self.copia)
                 self.ultima_copia = self.copia
                 break
+        self.label.configure(text="")
 
     def play_audio(self):
         try:
@@ -119,6 +121,7 @@ class app():
                     self.tts.save(self.myFile)
                 else:
                     self.tts.save(self.myFile)
+       
                 messagebox.showinfo("TASK COMPLETED","File created successfully.")
             except Exception as e:
                 messagebox.showwarning("ERROR","Unexpected error: "+str(e))
