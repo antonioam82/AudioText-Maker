@@ -19,6 +19,7 @@ class app():
         self.window.title("AudioText Maker")
         self.window['bg'] = 'gainsboro'
         self.window.geometry("785x299")
+        self.window.resizable(width=tk.FALSE,height=tk.FALSE)
         self.translator = Translator()
         self.translation = ""
         self.text = ""
